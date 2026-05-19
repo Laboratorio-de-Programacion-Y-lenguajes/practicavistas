@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar eliminación{% endblock %}
+
+{% block content %}
+  <h1>¿Estás seguro de que quieres eliminar el curso "{{ curso.titulo }}"?</h1>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url 'detalle_curso' curso.pk %}" class="btn btn-secondary">No, volver</a>
+</form>
+{% endblock %}

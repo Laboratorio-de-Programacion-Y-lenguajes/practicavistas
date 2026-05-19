@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Cursos{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Lista de Cursos</h1>
+{% for curso in cursos %}
+  <div class="card mb-3" onclick="window.location.href='{% url 'detalle_curso' curso.pk %}'" style="cursor: pointer;">
+    <div class="card-body">
+      <h5 class="card-title">{{ curso.titulo }}</h5>
+      <p class="card-text"><small class="text-muted">Fecha de inicio: {{ curso.fecha_inicio }}</small></p>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

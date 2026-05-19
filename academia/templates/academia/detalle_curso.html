@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle del Curso{% endblock %}
+
+{% block content %}
+  <h1 class="mb-4">{{ curso.titulo }}</h1>
+  <p><strong>Fecha de inicio:</strong> {{ curso.fecha_inicio }}</p>
+  <button class="btn btn-primary" onclick="window.location.href='{% url 'editar_curso' curso.pk %}'">Editar</button>
+  <button class="btn btn-danger" onclick="window.location.href='{% url 'eliminar_curso' curso.pk %}'">Eliminar</button>
+{% endblock %}
