@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     "academia",
 ]
 
+LOGIN_REDIRECT_URL = "/cursos/"
+
+LOGOUT_REDIRECT_URL = "/login/"
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

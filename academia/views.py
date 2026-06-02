@@ -8,8 +8,15 @@ from django.views.generic import (
     DeleteView,
 )
 from .models import Curso
+from .forms import CursoForm
 
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+)
+
+from django.contrib.auth import views as auth_views
 
 
 class CursoListView(ListView):
@@ -27,12 +34,19 @@ class CursoDetailView(DetailView):
     context_object_name = "curso"
 
 
-class CursoCreateView(SuccessMessageMixin, CreateView):
+class CursoCreateView(
+    LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, CreateView
+):
     model = Curso
-    fields = ["titulo", "instructor", "fecha_inicio"]
+    form_class = CursoForm
     template_name = "academia/curso_form.html"
     success_url = reverse_lazy("lista_cursos")
     success_message = "El curso fue creado exitosamente."
+    login_url = "/login/"
+
+    def test_func(self):
+        # Verificamos si el usuario tiene un perfil de instructor
+        return hasattr(self.request.user, "perfil_instructor")
 
 
 class CursoUpdateView(UpdateView):
